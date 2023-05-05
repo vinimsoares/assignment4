@@ -1,0 +1,17 @@
+package hw4;
+import api.PointPair;
+
+public class MultiFixedLink extends  AbstractLink {
+   
+    
+    /*An Array from 2-6 Point pairs Each pair has a begging point from where the train
+    comes from and a end point of where it is going
+    the number of pair points should be the same as the number of paths
+    */
+    public MultiFixedLink(PointPair[] connections) {
+	super(connections);
+    }
+   
+
+  
+}
