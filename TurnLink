@@ -1,0 +1,28 @@
+package hw4;
+
+import api.Point;
+import api.PointPair;
+import api.PositionVector;
+
+public class TurnLink extends AbstractLink{
+    /*
+     * Models a fixed link with three paths. The following figure shows the three paths labeled A, B, and C.
+ A     B
+ --- ---
+     \
+      \C
+ 
+The paths A and B run in the same direction and C branches away.
+A train from A always passes to C.
+A train from B always passes to A.
+A train from C always passes to A.
+     */
+    public TurnLink(Point endpointA, Point endpointB, Point endpointC) {
+	super(new PointPair[] {new PointPair(endpointA, endpointC), 
+		new PointPair(endpointB, endpointA),  new PointPair(endpointC, endpointA) });
+	
+    }
+
+
+
+}
