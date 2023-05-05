@@ -1,0 +1,47 @@
+package hw4;
+
+import api.Point;
+import api.PointPair;
+
+public class SwitchLink  extends AbstractLink{
+    private Point endpointA;
+    private Point endpointB;
+    private Point endpointC;
+    private boolean turn = false;
+    /*
+     *  A     B
+ --- ---
+     \
+      \C
+ 
+The paths A and B run in the same direction and C branches away.
+When turn is true a train from A passes to C.
+When turn is false a train from A passes to B.
+A train from B always passes to A.
+A train from C always passes to A.
+     */
+    
+    public SwitchLink(Point endpointA, Point endpointB, Point endpointC) {
+	super(new PointPair[] {new PointPair(endpointA, endpointB), 
+		new PointPair(endpointB, endpointA),  new PointPair(endpointC, endpointA) });
+	this.endpointA = endpointA;
+	this.endpointB = endpointB;
+	this.endpointC = endpointC;
+    }
+    public void setTurn(boolean turn) {
+	this.turn = turn;
+    }
+    @Override
+    public Point getConnectedPoint(Point point) {
+	if(point == endpointA && turn) {
+	    return endpointC;
+	}else if(point == endpointA && !turn) {
+	    return endpointB;
+	}else if(point == endpointB) {
+	    return endpointA;
+	}else if(point == endpointC) {
+	    return endpointA;
+	}
+	return null;
+    }
+}
