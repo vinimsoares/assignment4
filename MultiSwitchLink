@@ -1,0 +1,23 @@
+package hw4;
+
+import api.Point;
+import api.PointPair;
+
+public class MultiSwitchLink  extends AbstractLink{
+    private PointPair[] pairs;
+    
+    public MultiSwitchLink(PointPair[] connections) {
+	super(connections);
+	pairs = new PointPair[connections.length];
+	for(int i = 0; i< connections.length; i ++) {
+	    pairs[i] = connections[i];
+	}
+    }
+    /* changes the connection point of the train based on the index
+     * but it will do nothing if the train has already entered the crossing
+     */
+    public void switchConnection(PointPair pointPair, int index) {
+	pairs[index] = pointPair;
+
+}
+}
