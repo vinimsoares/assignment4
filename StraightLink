@@ -1,0 +1,28 @@
+package hw4;
+
+import api.Crossable;
+import api.Point;
+import api.PointPair;
+import api.PositionVector;
+
+public class StraightLink extends AbstractLink implements Crossable{
+    
+    /*A train from A always goes to B, train from B always goes to A
+     * and train from C always goes to A
+     *  A     B
+         --- ---
+             \
+              \C
+     * 
+     */
+    public StraightLink(Point endpointA, Point endpointB, Point endpointC) {
+	super(new PointPair[] {new PointPair(endpointA, endpointC), 
+		new PointPair(endpointB, endpointA),  new PointPair(endpointC, endpointA) });
+	
+	
+    }
+    
+
+  
+
+}
