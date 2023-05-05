@@ -1,0 +1,68 @@
+package hw4;
+
+import api.Crossable;
+
+import api.Path;
+import api.Point;
+import api.PointPair;
+import api.PositionVector;
+/*
+ * Because some classes have a PointPair[] array, I thought it would be possible to
+ * make a super constructor in abstarct link and make all the other methods require to call
+ * this super constructor, and depending on the class the paramethers for the super constructor are
+ * different. That way I could also miniminize the code written by getNumPaths and have most classes
+ * just use the getNumPaths from AbstractLink using the lenght of their point pair array.
+ * That way All other classes derive from AbstractLink and use most of the methods pre-defined by it.
+ * @author Vinicius Malaman Soares
+ */
+
+public abstract class AbstractLink implements Crossable {
+    private boolean TrainInTransit = false;
+    private PointPair[] pair;
+    @Override
+    public  void shiftPoints(PositionVector positionVector) {
+	if(!TrainInTransit) {
+	Point temp = getConnectedPoint(positionVector.getPointB());
+	positionVector.setPointA(temp);
+	Path path = temp.getPath();
+	Point pathPoint1 = path.getPointByIndex(0);
+	Point pathPoint2 = path.getPointByIndex(path.getNumPoints()-1);
+	if (temp.equals(pathPoint1)) {
+	    positionVector.setPointB(path.getPointByIndex(1));
+	}else {
+	    positionVector.setPointB(pathPoint2);
+	}
+	}
+    }
+ protected AbstractLink(PointPair[] pair) {
+     this.pair = pair;
+ }
+
+    @Override
+    public  Point getConnectedPoint(Point point) {
+	for(int i = 0; i< pair.length; i++) {
+	    if(point == pair[i].getPointA()) {
+		return pair[i].getPointB();
+	    }
+	}
+	return null;
+    }
+    
+
+    @Override
+    public void trainEnteredCrossing() {
+	TrainInTransit = true;
+	
+    }
+
+    @Override
+    public void trainExitedCrossing() {
+	TrainInTransit = false;
+	
+    }
+
+    public  int getNumPaths() {
+	return pair.length;
+    }
+
+}
