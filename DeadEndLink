@@ -1,0 +1,29 @@
+package hw4;
+
+import api.Crossable;
+import api.Point;
+import api.PointPair;
+import api.PositionVector;
+
+public class DeadEndLink extends AbstractLink implements Crossable{
+
+    public DeadEndLink() {
+	super(null);
+	// TODO Auto-generated constructor stub
+    }
+    // should return null for this class
+    @Override
+    public Point getConnectedPoint(Point point) {
+	return null;
+    }
+    //should do nothing
+    @Override
+    public void shiftPoints(PositionVector positionVector) {
+    }
+    @Override
+    public int getNumPaths() {
+	// TODO Auto-generated method stub
+	return 1;
+    }
+}
+
